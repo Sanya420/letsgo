@@ -4,7 +4,6 @@ import (
 	"awesomeProject15/pkg/models"
 	"errors"
 	"fmt"
-	//"html/template"
 	"net/http"
 	"strconv"
 )
@@ -21,13 +20,14 @@ func (app *application) home(w http.ResponseWriter, r *http.Request) {
 		return
 	}
 
-	for _, snippet := range s {
-		fmt.Fprintf(w, "%v\n", snippet)
-	}
-	//files := []string{
-	//	"./ui/html/home_page.html",
-	//	"./ui/html/base_layout.html",
-	//	"./ui/html/footer_partial.html",
+	app.render(w, r, "home_page.html", &templateData{
+		Snippets: s,
+	})
+
+	//	files := []string{
+	//		"./ui/html/home_page.html",
+	//		"./ui/html/base_layout.html",
+	//		"./ui/html/footer_partial.html",
 	//}
 
 	//ts, err := template.ParseFiles(files...)
@@ -35,7 +35,7 @@ func (app *application) home(w http.ResponseWriter, r *http.Request) {
 	//	app.serverError(w, err)
 	//	return
 	//}
-	//err = ts.Execute(w, nil)
+	//err = ts.Execute(w, data)
 	//if err != nil {
 	//	app.serverError(w, err)
 	//}
@@ -58,7 +58,26 @@ func (app *application) secondpage(w http.ResponseWriter, r *http.Request) {
 		return
 	}
 
-	fmt.Fprintf(w, "%v", s)
+	app.render(w, r, "show_page.html", &templateData{
+		Snippet: s,
+	})
+
+	//files := []string{
+	//"./ui/html/show_page.html",
+	//"./ui/html/base_layout.html",
+	//"./ui/html/footer_partial.html",
+	//}
+	//
+	//ts, err := template.ParseFiles(files...)
+	//if err != nil {
+	//app.serverError(w, err)
+	//return
+	//}
+	//
+	//err = ts.Execute(w, data)
+	//if err != nil {
+	//	app.serverError(w, err)
+	//}
 }
 
 func (app *application) raptext(w http.ResponseWriter, r *http.Request) {
