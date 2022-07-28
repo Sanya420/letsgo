@@ -24,21 +24,6 @@ func (app *application) home(w http.ResponseWriter, r *http.Request) {
 		Snippets: s,
 	})
 
-	//	files := []string{
-	//		"./ui/html/home_page.html",
-	//		"./ui/html/base_layout.html",
-	//		"./ui/html/footer_partial.html",
-	//}
-
-	//ts, err := template.ParseFiles(files...)
-	//if err != nil {
-	//	app.serverError(w, err)
-	//	return
-	//}
-	//err = ts.Execute(w, data)
-	//if err != nil {
-	//	app.serverError(w, err)
-	//}
 }
 
 func (app *application) secondpage(w http.ResponseWriter, r *http.Request) {
