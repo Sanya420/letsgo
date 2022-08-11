@@ -1,6 +1,7 @@
 package main
 
 import (
+	"awesomeProject15/pkg/forms"
 	"awesomeProject15/pkg/models"
 	_ "awesomeProject15/pkg/models"
 	"html/template"
@@ -10,6 +11,7 @@ import (
 
 type templateData struct {
 	CurrentYear int
+	Form        *forms.Form
 	Snippet     *models.Snippet
 	Snippets    []*models.Snippet
 }
