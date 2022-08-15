@@ -10,11 +10,13 @@ func (app *application) routes() http.Handler {
 
 	standardMiddleware := alice.New(app.recoverPanic, app.logRequest, secureHeaders)
 
+	dynamicMiddleware := alice.New(app.session.Enable)
+
 	mux := pat.New()
-	mux.Get("/", http.HandlerFunc(app.home))
-	mux.Get("/sec/create", http.HandlerFunc(app.createSnippetForm))
-	mux.Post("/sec/create", http.HandlerFunc(app.createSnippet))
-	mux.Get("/sec/:id", http.HandlerFunc(app.showsnippet))
+	mux.Get("/", dynamicMiddleware.ThenFunc(app.home))
+	mux.Get("/sec/create", dynamicMiddleware.ThenFunc(app.createSnippetForm))
+	mux.Post("/sec/create", dynamicMiddleware.ThenFunc(app.createSnippet))
+	mux.Get("/sec/:id", dynamicMiddleware.ThenFunc(app.showsnippet))
 
 	fileServer := http.FileServer(http.Dir("./ui/static"))
 	mux.Get("/static/", http.StripPrefix("/static", fileServer))
