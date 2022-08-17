@@ -13,8 +13,17 @@
     <h1><a href="/">Raptext</a></h1>
 </h>
 <nav>
+    <div>
     <a href="/">Crib</a>
     <a href="/sec/create">Create snippet</a>
+    </div>
+    <div>
+        <a href="/user/signup">Signup</a>
+        <a href="/user/login">Login</a>
+        <form action="/user/logout" method="post">
+            <button>Logout</button>
+        </form>
+    </div>
 </nav>
 <main>
     {{with .Flash}}
